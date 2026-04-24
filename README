@@ -1,0 +1,40 @@
+
+                                 VOIDSTEP
+
+
+OVERVIEW
+-------------------------------------------------------------------------------
+VoidStep is a lightweight, low-level process tracer and debugger built from 
+scratch in C. It leverages the Linux ptrace(2) system call to intercept and 
+control child processes at the instruction level.
+
+The project was designed to demonstrate core concepts of systems programming,
+including signal handling, register manipulation, and memory patching.
+
+
+INSTALLATION
+-------------------------------------------------------------------------------
+VoidStep uses the standard GNU build system. To compile and install:
+
+    $ ./configure
+    $ make
+    # make install (optional)
+
+QUICK START
+-------------------------------------------------------------------------------
+1. Compile your target program without PIE for absolute addressing:
+    $ gcc -no-pie -g -o target target.c
+
+2. Find the entry point or a function address:
+    $ nm target | grep main
+
+3. Launch VoidStep with the target and the breakpoint address:
+    $ ./voidstep ./target 0x40114d
+
+COMMANDS
+-------------------------------------------------------------------------------
+Once a breakpoint is hit, you can use the following commands:
+  (s)tep     - Execute the next machine instruction.
+  (c)ontinue - Resume process execution until the next trap or exit.
+  (x)examine - Read 8 bytes of memory at a specific address.
+  (w)rite    - Overwrite memory at a specific address with new data.
